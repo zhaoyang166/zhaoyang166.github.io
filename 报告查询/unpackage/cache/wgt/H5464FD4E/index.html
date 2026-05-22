@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>报告查验系统</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/1.css"> -->
+	<style>
+		*{
+		          box-sizing: border-box;
+		          margin: 0;
+		          padding: 0;
+		      }
+		      
+		      body {
+		          font-family: "Microsoft YaHei", "SimHei", sans-serif;
+		          line-height: 1.6;
+		          color: #333;
+		      }
+		      
+		      #tp {
+		          margin-top: 20px;
+		          background-image: url(img/1.png);
+		          background-size: cover;
+		          background-position: center;
+		          width: 100%;
+		          min-height: 400px;
+		          display: flex;
+		          flex-direction: column;
+		          justify-content: center;
+		          align-items: center;
+		          padding: 20px;
+		      }
+		      
+		      .header {
+		          width: 100%;
+		          padding: 15px 20px;
+		          display: flex;
+		          flex-wrap: wrap;
+		          justify-content: space-between;
+		          align-items: center;
+		          background-color: rgba(255, 255, 255, 0.9);
+		      }
+		      
+		      .company-name {margin-top:20px;
+		          font-weight: bold;
+		          font-size: clamp(16px, 2.5vw, 24px);
+		      }
+		      
+		      .nav-links a {
+		          margin-left: 5px;
+		          text-decoration: none;
+		          color: #333;
+		          transition: color 0.3s;
+					font-size: 14px;
+		      }
+		      
+		      .nav-links a:hover {
+		          color: #007bff;
+		      }
+		      
+		      .main-title {
+		          text-align: center;
+		          font-size: clamp(28px, 5vw, 53px);
+		          font-weight: 300;
+		          color: white;
+		          margin: 30px 0;
+		          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+		      }
+		      
+		      .search-container {
+		          background-color: rgba(85, 85, 85, 0.9);
+		          border-radius: 10px;
+		          padding: 10px;
+		          width: 100%;
+		          max-width: 600px;
+		           display: flex; 
+		          flex-wrap: nowrap;
+		          justify-content: center;
+		          gap: 15px;
+		      }
+		      
+		      .search-input {
+		          border-radius: 10px;
+		          flex-grow: 1;
+		          min-width: 200px;
+		          height: 50px;
+		          font-size: clamp(16px, 2vw, 20px);
+		          padding: 0 20px;
+		          border: none;
+		          outline: none;
+		      }
+		      
+		      .search-button {
+		          border-radius: 5px;
+		          height: 50px;
+		          font-size: clamp(16px, 2vw, 20px);
+		          color: white;
+		          background-color: #007bff;
+		          border: none;
+		          padding: 0 30px;
+		          cursor: pointer;
+		          transition: background-color 0.3s;
+		      }
+		      
+		      .search-button:hover {
+		          background-color: #0056b3;
+		      }
+		      
+		      .promo-text {
+		          background-color: rgba(102, 102, 102, 0.9);
+		          text-align: center;
+		          margin: 15px auto;
+		          padding: 5px 7px;
+		          font-size: clamp(12px, 2vw, 18px);
+		          color: white;
+		          border-radius: 5px;
+		          width: 90%;
+		          max-width: 600px;
+		      }
+		      
+		      .result-container {
+		          display: none;
+		          text-align: center;
+		          margin: 40px auto;
+		          padding: 30px 20px;
+		          max-width: 800px;
+		          width: 90%;
+		          animation: fadeIn 0.5s ease;
+					
+		      }
+		      
+		      @keyframes fadeIn {
+		          from { opacity: 0; transform: translateY(20px); }
+		          to { opacity: 1; transform: translateY(0); }
+		      }
+		      
+		      .report-image {
+		          max-width: 100%;
+		          height: auto;
+		          border: 1px solid #ddd;
+		          border-radius: 5px;
+		          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		          margin-bottom: 20px;
+		      }
+		      
+		      .success-message {
+		          color: #28a745;
+		          font-size: clamp(20px, 4vw, 24px);
+		          font-weight: bold;
+		          margin-bottom: 20px;
+		      }
+		      
+		      .error-message {
+		          color: #dc3545;
+		          font-size: clamp(20px, 4vw, 24px);
+		          font-weight: bold;
+		          padding: 30px;
+		          background-color: #f8d7da;
+		          border-radius: 5px;
+		          border: 1px solid #f5c6cb;
+		      }
+		      
+		      .footer {
+		          text-align: center;
+		          margin: 40px 0 20px 0;
+		          padding: 100px;
+		          font-size: clamp(14px, 2vw, 16px);
+		          color: #666;
+		          border-top: 1px solid #eee;
+					
+		      }
+	</style>
+</head>
+<body>
+    <div class="header">
+        <div class="company-name">
+            <a href="index.html" style="text-decoration: none; color: inherit;">广东省宝通质量检测有限公司</a>
+        </div>
+        <div class="nav-links" style="margin-top: 20px;">
+            <a href="index.html">网站主页</a>
+            <a href="index.html">联系我们</a>
+        </div>
+    </div>
+
+    <div id="tp">
+        <h1 class="main-title">检测报告在线查验</h1>
+        
+        <div class="search-container">
+            <input type="text" id="reportNumber" class="search-input" placeholder="请输入相关报告编号" autocomplete="off">
+            <button id="searchButton" class="search-button">查 询</button>
+        </div>
+        
+        <div class="promo-text">互联网+检测一站式服务，进度实时查，拿证提速35%</div>
+    </div>
+
+    <div id="resultContainer" class="result-container"></div>
+    
+    <div class="footer">证书查询 版权所有</div>
+    
+   <script>
+        // 模拟数据库：编号与对应图片的映射
+        const reportDatabase = {
+            'GBT267485743': 'img/tp.png',
+            // 可以在这里添加更多编号和对应的图片路径
+            // 'GBT123456789': 'img/report2.png',
+            // 'GBT987654321': 'img/report3.png',
+        };
+
+        // DOM元素
+        const reportInput = document.getElementById('reportNumber');
+        const searchButton = document.getElementById('searchButton');
+        const resultContainer = document.getElementById('resultContainer');
+
+        // 初始化：清空输入框
+        function initializeSearch() {
+            reportInput.value = '';
+            reportInput.focus();
+        }
+
+        // 执行搜索
+        function performSearch() {
+            const inputNumber = reportInput.value.trim().toUpperCase();
+            
+            // 清空之前的结果
+            resultContainer.innerHTML = '';
+            resultContainer.style.display = 'none';
+
+            if (!inputNumber) {
+                showError('请输入报告编号');
+                return;
+            }
+
+            // 检查编号是否存在
+            if (reportDatabase.hasOwnProperty(inputNumber)) {
+                showReport(inputNumber, reportDatabase[inputNumber]);
+            } else {
+                showError('抱歉，没有找到与搜索编号相关的产品！');
+            }
+            
+            // 清空输入框以便下次输入
+            reportInput.value = '';
+        }
+
+        // 显示报告
+        function showReport(reportNumber, imagePath) {
+            resultContainer.innerHTML = `
+                <div class="success-message">检验报告：${reportNumber}</div>
+                <img src="${imagePath}" alt="报告图片" class="report-image">
+                <p>报告编号：${reportNumber}</p>
+            `;
+            resultContainer.style.display = 'block';
+            
+            // 滚动到结果区域
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 显示错误信息
+        function showError(message) {
+            resultContainer.innerHTML = `<div class="error-message">${message}</div>`;
+            resultContainer.style.display = 'block';
+            
+            // 滚动到结果区域
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 事件监听
+        searchButton.addEventListener('click', performSearch);
+        
+        reportInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', initializeSearch);
+        
+        // 防止浏览器自动填充
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                initializeSearch();
+            }
+        });
+    </script> 
+</body>
+</html>
